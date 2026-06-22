@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nos Vemos en el Camerino - Campaña de Seguridad Vial</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        pitch: {
+                            50: '#f0fdf4',
+                            500: '#22c55e',
+                            600: '#16a34a',
+                            800: '#166534',
+                            950: '#052e16',
+                        },
+                        stadium: {
+                            900: '#0f172a',
+                            950: '#020617',
+                        },
+                        gold: '#fbbf24'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts & FontAwesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Chart.js for beautiful interactive charts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .football-pattern {
+            background-color: #020617;
+            background-image: radial-gradient(rgba(34, 197, 94, 0.15) 1px, transparent 0), radial-gradient(rgba(34, 197, 94, 0.15) 1px, transparent 0);
+            background-size: 40px 40px;
+            background-position: 0 0, 20px 20px;
+        }
+        .grass-gradient {
+            background: linear-gradient(135deg, #052e16 0%, #166534 100%);
+        }
+    </style>
+</head>
+<body class="font-sans text-slate-100 football-pattern min-h-screen flex flex-col">
+
+    <!-- Nav bar -->
+    <nav class="sticky top-0 z-50 bg-stadium-950/90 backdrop-blur-md border-b border-pitch-800/50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <div class="flex items-center gap-3">
+                    <div class="bg-gradient-to-tr from-pitch-500 to-gold p-2.5 rounded-xl shadow-lg shadow-pitch-500/20">
+                        <i class="fa-solid fa-shield-halved text-2xl text-stadium-950"></i>
+                    </div>
+                    <div>
+                        <span class="font-extrabold text-xl tracking-wider text-white block">EL CAMERINO</span>
+                        <span class="text-xs text-pitch-500 font-semibold tracking-widest uppercase">Seguridad Vial</span>
+                    </div>
+                </div>
+                <div class="hidden md:flex items-center gap-6">
+                    <a href="#charla-tecnica" class="hover:text-pitch-500 transition-colors font-medium text-sm flex items-center gap-1">📋 Charlas</a>
+                    <a href="#estadisticas" class="hover:text-pitch-500 transition-colors font-medium text-sm flex items-center gap-1">📊 Estadísticas</a>
+                    <a href="#juego-penalti" class="hover:text-pitch-500 transition-colors font-medium text-sm flex items-center gap-1">⚽ Juego</a>
+                    <a href="#evaluacion" class="hover:text-pitch-500 transition-colors font-medium text-sm flex items-center gap-1">📝 Evaluación</a>
+                    <a href="#cotizacion" class="hover:text-pitch-500 transition-colors font-medium text-sm flex items-center gap-1">💬 Cotizar</a>
+                </div>
+                <div class="flex items-center">
+                    <a href="#juego-penalti" class="bg-pitch-500 hover:bg-pitch-600 text-stadium-950 px-5 py-2.5 rounded-full font-bold text-sm tracking-wide transition-all duration-300 shadow-lg shadow-pitch-500/20 transform hover:-translate-y-0.5 flex items-center gap-2">
+                        <i class="fa-solid fa-gamepad"></i> Jugar y Ganar
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Header -->
+    <header class="relative overflow-hidden py-16 md:py-28 border-b border-pitch-950/40">
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(34,197,94,0.25),transparent_50%)]"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid md:grid-cols-12 gap-12 items-center">
+                <div class="md:col-span-7 space-y-6 text-center md:text-left">
+                    <div class="inline-flex items-center gap-2 bg-pitch-950/80 border border-pitch-500/30 px-4 py-2 rounded-full text-pitch-500 text-sm font-semibold tracking-wide shadow-inner">
+                        <span class="animate-ping h-2.5 w-2.5 rounded-full bg-pitch-500"></span>
+                        ⚽ CAMPAÑA VIAL MUNDIALISTA 2026
+                    </div>
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-none text-white">
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-pitch-500 via-emerald-400 to-gold">NOS VEMOS EN EL CAMERINO</span>
+                    </h1>
+                    <p class="text-xl sm:text-2xl font-bold text-slate-200 uppercase tracking-widest italic">
+                        ¡El mundial se vive, la vida se cuida! 🤝❤️
+                    </p>
+                    <p class="text-slate-300 text-base sm:text-lg max-w-xl mx-auto md:mx-0">
+                        En la gran fiesta del fútbol, tu mejor jugada es regresar a casa sano y salvo. Entra al camerino, prepárate con nuestra charla técnica, esquiva la imprudencia y demuestra que eres un conductor estrella.
+                    </p>
+                    <div class="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-4 pt-4">
+                        <a href="#charla-tecnica" class="w-full sm:w-auto text-center bg-white hover:bg-slate-100 text-stadium-950 px-8 py-4 rounded-xl font-bold text-base transition-all duration-300 shadow-xl flex items-center justify-center gap-2 transform hover:-translate-y-1">
+                            <i class="fa-solid fa-clipboard-list"></i> Ver Tácticas de Juego
+                        </a>
+                        <a href="#juego-penalti" class="w-full sm:w-auto text-center bg-gradient-to-r from-pitch-500 to-emerald-600 hover:from-pitch-600 hover:to-emerald-700 text-stadium-950 px-8 py-4 rounded-xl font-extrabold text-base transition-all duration-300 shadow-xl shadow-pitch-500/20 flex items-center justify-center gap-2 transform hover:-translate-y-1">
+                            <i class="fa-solid fa-futbol"></i> Jugar Penaltis de Seguridad
+                        </a>
+                    </div>
+                </div>
+                <!-- Visual Banner Element -->
+                <div class="md:col-span-5 relative flex justify-center">
+                    <div class="relative w-72 h-72 sm:w-80 sm:h-80 lg:w-96 lg:h-96 rounded-full bg-gradient-to-tr from-pitch-600 to-emerald-950/20 p-4 shadow-2xl flex items-center justify-center animate-pulse duration-4000">
+                        <div class="absolute inset-2 border-2 border-dashed border-pitch-500/40 rounded-full"></div>
+                        <div class="text-center p-6 space-y-4">
+                            <div class="text-6xl sm:text-7xl">⚽🚗</div>
+                            <div class="bg-stadium-950/90 border border-gold/40 px-4 py-2 rounded-lg inline-block">
+                                <span class="text-gold font-bold text-sm tracking-widest uppercase">TARJETA VERDE</span>
+                            </div>
+                            <p class="text-xs sm:text-sm text-slate-300 font-semibold uppercase leading-tight">Para los conductores que juegan limpio en la vía</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Statistics Section -->
+    <section id="estadisticas" class="py-16 bg-stadium-950 border-y border-pitch-950/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <span class="text-pitch-500 font-bold tracking-wider uppercase text-sm">📊 Datos que duelen pero concientizan</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-2">La Realidad en la Vía (Colombia)</h2>
+                <p class="text-slate-400 mt-3 text-base">Analiza las cifras de accidentalidad. En la vía, como en el fútbol, un error táctico puede costar la eliminación permanente.</p>
+            </div>
+
+            <!-- Global Stats Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+                <div class="bg-gradient-to-br from-slate-900 to-slate-950 border border-slate-800 p-6 rounded-2xl flex items-center gap-5 shadow-lg relative overflow-hidden group">
+                    <div class="absolute right-0 top-0 text-red-500/5 text-9xl font-bold select-none transition-transform group-hover:scale-110 duration-500">+8k</div>
+                    <div class="bg-red-500/10 p-4 rounded-xl text-red-500">
+                        <i class="fa-solid fa-skull-crossbones text-3xl"></i>
+                    </div>
+                    <div>
+                        <span class="block text-2xl sm:text-3xl font-extrabold text-red-400">8,405</span>
+                        <span class="block text-sm text-slate-400 font-medium">Fallecidos al año en Colombia (Promedio)</span>
+                    </div>
+                </div>
+                <div class="bg-gradient-to-br from-slate-900 to-slate-950 border border-slate-800 p-6 rounded-2xl flex items-center gap-5 shadow-lg relative overflow-hidden group">
+                    <div class="absolute right-0 top-0 text-orange-500/5 text-9xl font-bold select-none transition-transform group-hover:scale-110 duration-500">60%</div>
+                    <div class="bg-orange-500/10 p-4 rounded-xl text-orange-500">
+                        <i class="fa-solid fa-motorcycle text-3xl"></i>
+                    </div>
+                    <div>
+                        <span class="block text-2xl sm:text-3xl font-extrabold text-orange-400">61.2%</span>
+                        <span class="block text-sm text-slate-400 font-medium">De las víctimas son Motociclistas</span>
+                    </div>
+                </div>
+                <div class="bg-gradient-to-br from-slate-900 to-slate-950 border border-slate-800 p-6 rounded-2xl flex items-center gap-5 shadow-lg relative overflow-hidden group">
+                    <div class="absolute right-0 top-0 text-pitch-500/5 text-9xl font-bold select-none transition-transform group-hover:scale-110 duration-500">90%</div>
+                    <div class="bg-pitch-500/10 p-4 rounded-xl text-pitch-500">
+                        <i class="fa-solid fa-user-ninja text-3xl"></i>
+                    </div>
+                    <div>
+                        <span class="block text-2xl sm:text-3xl font-extrabold text-pitch-400">90.5%</span>
+                        <span class="block text-sm text-slate-400 font-medium">Debido al Factor Humano (Evitable)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cities Selector and Charts -->
+            <div class="bg-slate-900/40 border border-pitch-800/40 p-6 sm:p-8 rounded-3xl backdrop-blur-sm">
+                <h3 class="text-xl font-bold text-white mb-6 flex items-center gap-2">
+                    <i class="fa-solid fa-map-location-dot text-pitch-500"></i> Análisis de Siniestros por Ciudades Principales
+                </h3>
+                <div class="grid lg:grid-cols-12 gap-8 items-center">
+                    <div class="lg:col-span-4 space-y-3">
+                        <p class="text-sm text-slate-400 mb-4">Selecciona una ciudad de Colombia para ver el reporte de la alineación de siniestralidad.</p>
+                        <!-- Interactive buttons -->
+                        <div class="space-y-2 flex flex-col">
+                            <button onclick="updateCityStats('bogota')" id="btn-bogota" class="city-btn active bg-pitch-500 text-stadium-950 px-5 py-3 rounded-xl font-bold flex items-center justify-between transition-all duration-300">
+                                <span>🏙️ Bogotá D.C.</span> <i class="fa-solid fa-chevron-right text-xs"></i>
+                            </button>
+                            <button onclick="updateCityStats('medellin')" id="btn-medellin" class="city-btn bg-slate-800 hover:bg-slate-700 text-white px-5 py-3 rounded-xl font-bold flex items-center justify-between transition-all duration-300">
+                                <span>🌆 Medellín</span> <i class="fa-solid fa-chevron-right text-xs"></i>
+                            </button>
+                            <button onclick="updateCityStats('cali')" id="btn-cali" class="city-btn bg-slate-800 hover:bg-slate-700 text-white px-5 py-3 rounded-xl font-bold flex items-center justify-between transition-all duration-300">
+                                <span>🌴 Cali</span> <i class="fa-solid fa-chevron-right text-xs"></i>
+                            </button>
+                            <button onclick="updateCityStats('barranquilla')" id="btn-barranquilla" class="city-btn bg-slate-800 hover:bg-slate-700 text-white px-5 py-3 rounded-xl font-bold flex items-center justify-between transition-all duration-300">
+                                <span>🏖️ Barranquilla</span> <i class="fa-solid fa-chevron-right text-xs"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="lg:col-span-8 bg-slate-950/60 p-6 rounded-2xl border border-slate-800">
+                        <div class="grid sm:grid-cols-2 gap-6 mb-6">
+                            <div>
+                                <span class="text-xs text-slate-500 uppercase font-semibold">Ciudad Monitoreada</span>
+                                <h4 id="stat-city-name" class="text-2xl font-black text-white">Bogotá D.C.</h4>
+                            </div>
+                            <div class="text-sm-right">
+                                <span class="text-xs text-slate-500 uppercase font-semibold">Principal Causa de Choques</span>
+                                <p id="stat-city-cause" class="text-lg font-bold text-amber-400">Exceso de Velocidad y No Distancia</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Mini Bar Stats Grid (No-Library Fallback + Canvas) -->
+                        <div class="space-y-4">
+                            <div>
+                                <div class="flex justify-between text-xs font-semibold mb-1">
+                                    <span class="text-slate-300">Participación Motos en Muertes</span>
+                                    <span id="pct-moto-label" class="text-orange-400">45%</span>
+                                </div>
+                                <div class="w-full bg-slate-800 h-3 rounded-full overflow-hidden">
+                                    <div id="pct-moto-bar" class="bg-orange-500 h-full rounded-full transition-all duration-1000" style="width: 45%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-xs font-semibold mb-1">
+                                    <span class="text-slate-300">Siniestros por Imprudencia Peatonal</span>
+                                    <span id="pct-peaton-label" class="text-sky-400">22%</span>
+                                </div>
+                                <div class="w-full bg-slate-800 h-3 rounded-full overflow-hidden">
+                                    <div id="pct-peaton-bar" class="bg-sky-500 h-full rounded-full transition-all duration-1000" style="width: 22%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-xs font-semibold mb-1">
+                                    <span class="text-slate-300">Siniestros en Horario Nocturno / Fines de Semana</span>
+                                    <span id="pct-noc-label" class="text-red-400">58%</span>
+                                </div>
+                                <div class="w-full bg-slate-800 h-3 rounded-full overflow-hidden">
+                                    <div id="pct-noc-bar" class="bg-red-500 h-full rounded-full transition-all duration-1000" style="width: 58%"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-6 pt-4 border-t border-slate-800 text-xs text-slate-400 italic">
+                            💡 *Datos consolidados bajo análisis de la Agencia Nacional de Seguridad Vial (ANSV).* En el mundial de la vida, ¡tu equipo te necesita completo!
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Talks (Charlas) & Tips Section -->
+    <section id="charla-tecnica" class="py-16 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <span class="text-pitch-500 font-bold tracking-wider uppercase text-sm">📋 CHARLA TÉCNICA DEL DT</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-2">La Estrategia para Salir Campeón en la Vía</h2>
+                <p class="text-slate-400 mt-3 text-base">Antes de salir a la vía (a la cancha), todo buen jugador repasa el manual técnico. Haz clic en las tácticas del Director Técnico para desplegar consejos clave de seguridad vial de forma interactiva.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Tip 1 -->
+                <div class="bg-gradient-to-br from-slate-900 to-slate-950 border border-slate-800 p-6 rounded-2xl relative group hover:border-pitch-500/50 transition-all duration-300 shadow-xl flex flex-col justify-between">
+                    <div>
+                        <div class="text-4xl mb-4 text-pitch-500">🛡️</div>
+                        <h3 class="text-lg font-bold text-white mb-2">Alineación Defensiva</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed mb-4">La distancia de seguridad es tu zaga defensiva. ¡Que no te hagan un contragolpe!</p>
+                    </div>
+                    <button onclick="openModal('defensa')" class="w-full bg-slate-800 hover:bg-pitch-500 hover:text-stadium-950 text-slate-200 py-2.5 rounded-xl text-xs font-bold transition-all duration-300">
+                        📖 Ver Plan del DT
+                    </button>
+                </div>
+
+                <!-- Tip 2 -->
+                <div class="bg-gradient-to-br from-slate-900 to-slate-950 border border-slate-800 p-6 rounded-2xl relative group hover:border-pitch-500/50 transition-all duration-300 shadow-xl flex flex-col justify-between">
+                    <div>
+                        <div class="text-4xl mb-4 text-pitch-500">🚫</div>
+                        <h3 class="text-lg font-bold text-white mb-2">Cero Alcohol en Cancha</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed mb-4">Si tomas alcohol, quedas expulsado inmediatamente con tarjeta roja directa. ¡No arriesgues la vida!</p>
+                    </div>
+                    <button onclick="openModal('alcohol')" class="w-full bg-slate-800 hover:bg-pitch-500 hover:text-stadium-950 text-slate-200 py-2.5 rounded-xl text-xs font-bold transition-all duration-300">
+                        📖 Ver Plan del DT
+                    </button>
+                </div>
+
+                <!-- Tip 3 -->
+                <div class="bg-gradient-to-br from-slate-900 to-slate-950 border border-slate-800 p-6 rounded-2xl relative group hover:border-pitch-500/50 transition-all duration-300 shadow-xl flex flex-col justify-between">
+                    <div>
+                        <div class="text-4xl mb-4 text-pitch-500">🚦</div>
+                        <h3 class="text-lg font-bold text-white mb-2">Respetar al Árbitro</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed mb-4">Los semáforos, señales y límites de velocidad son las reglas del árbitro. Si las rompes, pierdes.</p>
+                    </div>
+                    <button onclick="openModal('reglas')" class="w-full bg-slate-800 hover:bg-pitch-500 hover:text-stadium-950 text-slate-200 py-2.5 rounded-xl text-xs font-bold transition-all duration-300">
+                        📖 Ver Plan del DT
+                    </button>
+                </div>
+
+                <!-- Tip 4 -->
+                <div class="bg-gradient-to-br from-slate-900 to-slate-950 border border-slate-800 p-6 rounded-2xl relative group hover:border-pitch-500/50 transition-all duration-300 shadow-xl flex flex-col justify-between">
+                    <div>
+                        <div class="text-4xl mb-4 text-pitch-500">🧠</div>
+                        <h3 class="text-lg font-bold text-white mb-2">Concentración Total</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed mb-4">Celulares y distracciones son el rival directo. ¡Mantén la vista en el balón de la vía!</p>
+                    </div>
+                    <button onclick="openModal('distraccion')" class="w-full bg-slate-800 hover:bg-pitch-500 hover:text-stadium-950 text-slate-200 py-2.5 rounded-xl text-xs font-bold transition-all duration-300">
+                        📖 Ver Plan del DT
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal Manager -->
+    <div id="modal-container" class="fixed inset-0 z-50 hidden bg-stadium-950/80 backdrop-blur-md flex items-center justify-center p-4">
+        <div class="bg-slate-900 border border-pitch-500/40 rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative animate-scaleUp">
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-2xl">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div id="modal-content" class="space-y-4">
+                <!-- Dynamically populated -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Penalty Game Section -->
+    <section id="juego-penalti" class="py-16 grass-gradient relative overflow-hidden border-y border-pitch-950">
+        <div class="absolute inset-0 bg-black/40 z-0"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center max-w-3xl mx-auto mb-10">
+                <span class="bg-gold/10 border border-gold/40 text-gold font-bold px-4 py-1.5 rounded-full text-xs uppercase tracking-widest inline-block">🎮 JUEGO INTERACTIVO</span>
+                <h2 class="text-3xl sm:text-4xl font-black text-white mt-3">Golea a la Imprudencia: El Penalti Vial</h2>
+                <p class="text-slate-200 mt-2 text-sm sm:text-base">Anótale un gol a los accidentes viales. Responde correctamente la pregunta de seguridad vial para elegir la mejor dirección de tiro y marcar un golazo. ¡Si anotas el penalti, desbloqueas un premio!</p>
+            </div>
+
+            <div class="max-w-4xl mx-auto bg-stadium-950/90 border-2 border-pitch-500/30 p-4 sm:p-8 rounded-3xl shadow-2xl relative">
+                <!-- Game Container Grid -->
+                <div class="grid md:grid-cols-12 gap-6 items-center">
+                    
+                    <!-- Goal Field visual simulation -->
+                    <div class="md:col-span-6 relative bg-emerald-950 border border-pitch-500/40 rounded-2xl h-64 sm:h-80 overflow-hidden flex flex-col justify-end p-4">
+                        <!-- Goal structure -->
+                        <div class="absolute inset-x-8 top-0 h-44 border-b-4 border-x-4 border-white flex justify-center items-end bg-gradient-to-b from-white/10 to-transparent">
+                            <!-- Net overlay pattern -->
+                            <div class="absolute inset-0 opacity-10" style="background-image: linear-gradient(45deg, #fff 25%, transparent 25%), linear-gradient(-45deg, #fff 25%, transparent 25%); background-size: 10px 10px;"></div>
+                            
+                            <!-- Goalkeeper (Imprudencia) -->
+                            <div id="goalkeeper" class="relative bottom-0 text-5xl transition-all duration-500 transform translate-x-0">
+                                🧤😈🧤
+                            </div>
+                        </div>
+
+                        <!-- Football Ball -->
+                        <div class="absolute inset-x-0 bottom-4 flex justify-center z-10">
+                            <div id="game-ball" class="text-4xl transition-all duration-1000 transform scale-100 hover:scale-110 cursor-pointer">
+                                ⚽
+                            </div>
+                        </div>
+
+                        <!-- Game Feedback Text Overlay -->
+                        <div id="game-feedback" class="absolute inset-0 bg-stadium-950/90 flex flex-col items-center justify-center text-center p-6 hidden z-20">
+                            <span id="feedback-icon" class="text-5xl mb-3">🎉</span>
+                            <h4 id="feedback-title" class="text-xl font-bold text-white mb-1">¡Gooooool!</h4>
+                            <p id="feedback-desc" class="text-xs text-slate-300 mb-4">Esquivaste el exceso de velocidad de forma defensiva.</p>
+                            <button onclick="resetGameStep()" class="bg-pitch-500 hover:bg-pitch-600 text-stadium-950 font-bold px-4 py-2 rounded-lg text-xs transition-all">
+                                Jugar Siguiente Turno 🔄
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Interactive Questions Area -->
+                    <div class="md:col-span-6 space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs text-pitch-500 font-bold tracking-widest uppercase">Marcador de Seguridad</span>
+                            <div class="flex items-center gap-2">
+                                <span class="bg-pitch-950 border border-pitch-500/20 text-white font-extrabold px-3 py-1 rounded-md text-sm">Goles: <span id="game-score">0</span></span>
+                                <span class="bg-red-950 border border-red-500/20 text-red-400 font-extrabold px-3 py-1 rounded-md text-sm">Tarjetas 🟥: <span id="game-faults">0</span>/3</span>
+                            </div>
+                        </div>
+
+                        <!-- Question Box -->
+                        <div class="bg-slate-900/80 p-5 rounded-2xl border border-slate-800 space-y-3 min-h-[160px] flex flex-col justify-between">
+                            <div>
+                                <span class="text-xs font-semibold text-slate-400">Pregunta en Campo:</span>
+                                <h3 id="game-question" class="text-sm sm:text-base font-bold text-white leading-snug mt-1">¿Cuál es el límite máximo de velocidad permitido en zonas residenciales urbanas de Colombia?</h3>
+                            </div>
+                            
+                            <!-- Answers Radio options -->
+                            <div id="game-options" class="grid gap-2 pt-2">
+                                <!-- Populated dynamically -->
+                            </div>
+                        </div>
+
+                        <button id="btn-kick" onclick="shootPenalty()" class="w-full bg-gradient-to-r from-gold to-yellow-500 hover:from-yellow-500 hover:to-gold text-stadium-950 font-extrabold py-3.5 rounded-xl shadow-lg transition-all duration-300 transform active:scale-95 flex items-center justify-center gap-2">
+                            🚀 ¡KICK - Patear el Siniestro!
+                        </button>
+                    </div>
+
+                </div>
+
+                <!-- Prize Reward Area - Hidden by default until target goals met -->
+                <div id="prize-container" class="mt-8 border-t border-pitch-500/30 pt-6 hidden text-center space-y-4 animate-scaleUp">
+                    <div class="bg-gradient-to-r from-yellow-500/10 via-pitch-500/10 to-yellow-500/10 p-6 rounded-2xl border border-gold/40 max-w-xl mx-auto">
+                        <span class="text-3xl">🏆</span>
+                        <h4 class="text-xl font-black text-gold uppercase mt-2">¡HAS GANADO EL PREMIO DEL CAMERINO!</h4>
+                        <p class="text-sm text-slate-200 mt-1">Por tu impecable juego limpio y habilidad táctica, has desbloqueado tu premio oficial.</p>
+                        
+                        <div class="my-4 bg-slate-950/80 p-3 rounded-lg border border-pitch-800/60 inline-block">
+                            <span class="text-xs text-slate-400 block uppercase tracking-wider font-semibold">Código del Premio (Descuento del 15% para tu empresa o regalo)</span>
+                            <span class="text-lg font-black tracking-widest text-pitch-400 select-all">SEGVIALMUNDIAL2026</span>
+                        </div>
+                        <p class="text-xs text-slate-400">Copia el código anterior y compártelo en el formulario de cotización o de contacto para reclamar beneficios de capacitación empresarial.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Road Safety Evaluation -->
+    <section id="evaluacion" class="py-16 bg-stadium-950">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-10">
+                <span class="text-pitch-500 font-bold tracking-wider uppercase text-sm">📝 EXAMEN DE PRE-ALINEACIÓN</span>
+                <h2 class="text-3xl font-extrabold text-white mt-1">Estrategia de Evaluación: ¿Estás Listo para Jugar?</h2>
+                <p class="text-slate-400 mt-2 text-sm sm:text-base">Responde el test de aptitud vial y obtén tu **Licencia de Conductor Estrella** para presumir en el camerino.</p>
+            </div>
+
+            <div class="bg-slate-900 border border-slate-800 p-6 sm:p-8 rounded-3xl shadow-xl space-y-6">
+                <!-- User Details Name needed for certificate -->
+                <div class="space-y-2">
+                    <label for="eval-username" class="block text-sm font-bold text-slate-300">Introduce tu nombre de Conductor:</label>
+                    <div class="relative">
+                        <span class="absolute inset-y-0 left-0 flex items-center pl-4 text-slate-400">🏅</span>
+                        <input type="text" id="eval-username" placeholder="Ej: Juan Sebastián Pérez" class="w-full bg-slate-950 border border-slate-800 focus:border-pitch-500 text-white rounded-xl py-3 pl-11 pr-4 focus:outline-none transition-all">
+                    </div>
+                </div>
+
+                <div id="quiz-questions-wrapper" class="space-y-6 pt-4 border-t border-slate-800">
+                    <!-- Dynamic evaluation quiz questions -->
+                </div>
+
+                <div class="pt-4 flex flex-col items-center">
+                    <button onclick="submitEvaluation()" class="bg-pitch-500 hover:bg-pitch-600 text-stadium-950 font-black px-8 py-3.5 rounded-xl transition-all shadow-lg transform hover:-translate-y-0.5">
+                        📜 Evaluar mi Rendimiento y Generar Licencia
+                    </button>
+                    <p class="text-xs text-slate-400 mt-2">Es necesario responder todas las preguntas.</p>
+                </div>
+
+                <!-- Certificate Display Area -->
+                <div id="certificate-box" class="mt-8 border-t-2 border-dashed border-pitch-500/20 pt-6 hidden">
+                    <div class="bg-slate-950 border-4 border-double border-gold/60 p-6 rounded-2xl max-w-xl mx-auto text-center space-y-4 shadow-2xl relative overflow-hidden">
+                        <div class="absolute inset-x-0 -top-12 opacity-5 text-gold text-9xl">⭐</div>
+                        <span class="text-gold text-4xl block">🏆</span>
+                        <h3 class="text-lg font-bold uppercase tracking-widest text-gold">CAMERINO DE SEGURIDAD VIAL</h3>
+                        <p class="text-xs uppercase text-slate-400 tracking-wider">Certificado de Conductor Responsable</p>
+                        
+                        <div class="py-4 border-y border-slate-800">
+                            <p class="text-xs text-slate-400">Por haber aprobado con éxito el test de táctica vial:</p>
+                            <p id="cert-user-name" class="text-xl font-extrabold text-white tracking-wide mt-1">Juan Sebastián Pérez</p>
+                            <p class="text-xs text-pitch-400 mt-2 font-semibold">"El mundial se vive, la vida se cuida"</p>
+                        </div>
+                        
+                        <div class="flex items-center justify-between text-xs text-slate-400 pt-2">
+                            <span>Código: <strong class="text-slate-300">STAR-DRI-2026</strong></span>
+                            <span>Aprobado: <strong class="text-pitch-400">100%</strong></span>
+                        </div>
+                        <p class="text-[10px] text-slate-500 italic mt-4">¡Toma un pantallazo o imprime tu certificado para lucirlo en el camerino de tu empresa!</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact / WhatsApp Quotation Section -->
+    <section id="cotizacion" class="py-16 border-t border-pitch-950/50 bg-stadium-950/80 relative">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-10">
+                <span class="text-pitch-500 font-bold tracking-wider uppercase text-sm">💬 CONTRATACIONES Y EVENTOS</span>
+                <h2 class="text-3xl font-extrabold text-white mt-1">Inscribe a tu Equipo: Agenda tu Charla Corporativa</h2>
+                <p class="text-slate-400 mt-2 text-sm sm:text-base">¿Deseas implementar esta campaña mundialista en tu empresa? Completa los datos y solicita una cotización inmediata directa a nuestro WhatsApp. 📱</p>
+            </div>
+
+            <div class="bg-gradient-to-tr from-slate-900 to-slate-950 border border-slate-800 p-6 sm:p-10 rounded-3xl shadow-2xl space-y-6">
+                <form id="whatsapp-form" onsubmit="sendWhatsAppQuote(event)" class="space-y-4">
+                    <div class="grid sm:grid-cols-2 gap-4">
+                        <div class="space-y-1">
+                            <label class="text-xs font-bold text-slate-300 uppercase">Nombre Completo</label>
+                            <input required type="text" id="quote-name" placeholder="Tu nombre" class="w-full bg-slate-950 border border-slate-800 focus:border-pitch-500 text-white rounded-xl p-3 focus:outline-none transition-all text-sm">
+                        </div>
+                        <div class="space-y-1">
+                            <label class="text-xs font-bold text-slate-300 uppercase">Empresa / Institución</label>
+                            <input required type="text" id="quote-company" placeholder="Nombre de tu empresa" class="w-full bg-slate-950 border border-slate-800 focus:border-pitch-500 text-white rounded-xl p-3 focus:outline-none transition-all text-sm">
+                        </div>
+                    </div>
+
+                    <div class="grid sm:grid-cols-2 gap-4">
+                        <div class="space-y-1">
+                            <label class="text-xs font-bold text-slate-300 uppercase">Ciudad</label>
+                            <select id="quote-city" class="w-full bg-slate-950 border border-slate-800 focus:border-pitch-500 text-white rounded-xl p-3 focus:outline-none transition-all text-sm">
+                                <option value="Bogotá">Bogotá D.C.</option>
+                                <option value="Medellín">Medellín</option>
+                                <option value="Cali">Cali</option>
+                                <option value="Barranquilla">Barranquilla</option>
+                                <option value="Bucaramanga">Bucaramanga</option>
+                                <option value="Otra">Otra Ciudad</option>
+                            </select>
+                        </div>
+                        <div class="space-y-1">
+                            <label class="text-xs font-bold text-slate-300 uppercase">Número de Empleados / Jugadores</label>
+                            <input required type="number" id="quote-employees" placeholder="Ej: 50" class="w-full bg-slate-950 border border-slate-800 focus:border-pitch-500 text-white rounded-xl p-3 focus:outline-none transition-all text-sm">
+                        </div>
+                    </div>
+
+                    <div class="space-y-1">
+                        <label class="text-xs font-bold text-slate-300 uppercase">Servicio de interés</label>
+                        <select id="quote-service" class="w-full bg-slate-950 border border-slate-800 focus:border-pitch-500 text-white rounded-xl p-3 focus:outline-none transition-all text-sm">
+                            <option value="Charla del DT (Virtual)">Charla del DT (Virtual) - 1 Hora</option>
+                            <option value="Camerino Móvil Presencial (Simuladores)">Camerino Móvil Presencial (Con Simuladores y Gafas de Alcoholemia)</option>
+                            <option value="Kit de Recursos y Juego Web de Seguridad Vial">Kit de Recursos y Juego Web de Seguridad Vial</option>
+                        </select>
+                    </div>
+
+                    <div class="space-y-1">
+                        <label class="text-xs font-bold text-slate-300 uppercase">Mensaje o Código de Premio</label>
+                        <textarea id="quote-message" rows="3" placeholder="Ingresa dudas específicas, fechas estimadas o tu Código de Premio..." class="w-full bg-slate-950 border border-slate-800 focus:border-pitch-500 text-white rounded-xl p-3 focus:outline-none transition-all text-sm"></textarea>
+                    </div>
+
+                    <div class="pt-2">
+                        <button type="submit" class="w-full bg-green-500 hover:bg-green-600 text-white font-black py-4 rounded-xl shadow-lg transition-all flex items-center justify-center gap-2 transform active:scale-95">
+                            <i class="fa-brands fa-whatsapp text-xl"></i> SOLICITAR COTIZACIÓN POR WHATSAPP
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-stadium-950 border-t border-pitch-950/50 py-10 mt-auto text-slate-500 text-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4">
+            <p class="font-bold text-slate-300">⚽ EL MUNDIAL SE VIVE, LA VIDA SE CUIDA ⚽</p>
+            <p>Campaña formativa adaptada a la seguridad vial empresarial de Colombia.</p>
+            <p class="text-xs text-slate-600">&copy; 2026 Camerino Vial. Todos los derechos de juego limpio reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        // CITY STATISTICS DATABASE
+        const cityDatabase = {
+            bogota: {
+                name: "Bogotá D.C. 🏙️",
+                cause: "Exceso de velocidad / Distracciones",
+                motoPct: 42,
+                peatonPct: 35,
+                nocPct: 55
+            },
+            medellin: {
+                name: "Medellín 🌆",
+                cause: "No mantener distancia de seguridad",
+                motoPct: 62,
+                peatonPct: 18,
+                nocPct: 60
+            },
+            cali: {
+                name: "Cali 🌴",
+                cause: "Impericia / Maniobras Peligrosas",
+                motoPct: 68,
+                peatonPct: 20,
+                nocPct: 65
+            },
+            barranquilla: {
+                name: "Barranquilla 🏖️",
+                cause: "Embriaguez / No acatar señales",
+                motoPct: 52,
+                peatonPct: 24,
+                nocPct: 58
+            }
+        };
+
+        // FUNCTION TO UPDATE STATISTICS VIEW
+        function updateCityStats(cityKey) {
+            // Update active state class on buttons
+            document.querySelectorAll('.city-btn').forEach(btn => {
+                btn.classList.remove('bg-pitch-500', 'text-stadium-950');
+                btn.classList.add('bg-slate-800', 'hover:bg-slate-700', 'text-white');
+            });
+            
+            const selectedBtn = document.getElementById(`btn-${cityKey}`);
+            if (selectedBtn) {
+                selectedBtn.classList.remove('bg-slate-800', 'hover:bg-slate-700', 'text-white');
+                selectedBtn.classList.add('bg-pitch-500', 'text-stadium-950');
+            }
+
+            const data = cityDatabase[cityKey];
+            if (data) {
+                document.getElementById('stat-city-name').innerText = data.name;
+                document.getElementById('stat-city-cause').innerText = data.cause;
+                
+                // Animate bars
+                document.getElementById('pct-moto-label').innerText = `${data.motoPct}%`;
+                document.getElementById('pct-moto-bar').style.width = `${data.motoPct}%`;
+
+                document.getElementById('pct-peaton-label').innerText = `${data.peatonPct}%`;
+                document.getElementById('pct-peaton-bar').style.width = `${data.peatonPct}%`;
+
+                document.getElementById('pct-noc-label').innerText = `${data.nocPct}%`;
+                document.getElementById('pct-noc-bar').style.width = `${data.nocPct}%`;
+            }
+        }
+
+        // CHARLAS / PLANS MODAL SYSTEM
+        const modalData = {
+            defensa: {
+                title: "🛡️ Táctica 1: La Defensa Perfecta",
+                body: `<p class="text-slate-300 mb-4"><strong>¿Cuál es la estrategia del DT?</strong> Mantener una distancia segura con el vehículo que te precede.</p>
+                       <ul class="list-disc pl-5 text-slate-300 space-y-2 text-sm">
+                         <li><strong>Regla de los 3 segundos:</strong> En piso seco, cuenta 3 segundos de distancia con el vehículo de adelante.</li>
+                         <li><strong>En caso de lluvia (Cancha Mojada):</strong> Dobla la distancia a 6 segundos para evitar deslizamientos inesperados.</li>
+                         <li><strong>Punto ciego:</strong> No te ubiques en las zonas invisibles de los camiones de gran tamaño.</li>
+                       </ul>`
+            },
+            alcohol: {
+                title: "🚫 Táctica 2: Concentración sin Aditivos",
+                body: `<p class="text-slate-300 mb-4"><strong>¿Cuál es la estrategia del DT?</strong> No se juega ni se conduce bajo efectos del alcohol o sustancias psicoactivas.</p>
+                       <ul class="list-disc pl-5 text-slate-300 space-y-2 text-sm">
+                         <li><strong>Tarjeta Roja Directa:</strong> Incluso un solo trago altera tus reflejos, campo visual y toma de decisiones.</li>
+                         <li><strong>Conductor Elegido:</strong> Ten siempre designado un jugador estrella que no beba para llevar el equipo a casa.</li>
+                         <li><strong>Sanciones en Colombia:</strong> Multas severas, retención de licencia y hasta cárcel según el grado de alcoholemia. ¡No lo vale!</li>
+                       </ul>`
+            },
+            reglas: {
+                title: "🚦 Táctica 3: Respeto estricto al reglamento",
+                body: `<p class="text-slate-300 mb-4"><strong>¿Cuál es la estrategia del DT?</strong> Las señales de tránsito no son sugerencias, son órdenes del referí.</p>
+                       <ul class="list-disc pl-5 text-slate-300 space-y-2 text-sm">
+                         <li><strong>Zonas Escolares / Residenciales:</strong> El límite es absoluto: 30 km/h máximo. Los peatones tienen prioridad de paso.</li>
+                         <li><strong>El Semáforo en Amarillo:</strong> Significa desacelerar y detenerse, NO acelerar para ganarle al cambio.</li>
+                         <li><strong>Señal de PARE:</strong> Detener completamente las ruedas, mirar a ambos lados y avanzar solo cuando sea seguro.</li>
+                       </ul>`
+            },
+            distraccion: {
+                title: "🧠 Táctica 4: Concentración Total en el Juego",
+                body: `<p class="text-slate-300 mb-4"><strong>¿Cuál es la estrategia del DT?</strong> Manos al volante, ojos en la vía.</p>
+                       <ul class="list-disc pl-5 text-slate-300 space-y-2 text-sm">
+                         <li><strong>El Celular al Banquillo:</strong> No respondas mensajes de WhatsApp, correos o realices llamadas mientras conduces.</li>
+                         <li><strong>Gafas de Sol y Elementos de Confort:</strong> Ajústalos antes de iniciar el viaje.</li>
+                         <li><strong>Fatiga y Cansancio:</strong> Si viajas largas distancias, haz pausas activas cada 2 horas o 200 km para mantener los reflejos activos.</li>
+                       </ul>`
+            }
+        };
+
+        function openModal(key) {
+            const data = modalData[key];
+            if (data) {
+                const content = document.getElementById('modal-content');
+                content.innerHTML = `
+                    <h3 class="text-2xl font-bold text-white mb-2">${data.title}</h3>
+                    <div class="border-b border-pitch-500/30 pb-4 mb-4">
+                        ${data.body}
+                    </div>
+                    <div class="flex justify-end">
+                        <button onclick="closeModal()" class="bg-pitch-500 hover:bg-pitch-600 text-stadium-950 px-5 py-2 rounded-xl font-bold text-sm transition-all">
+                            ¡Entendido, DT! 👍
+                        </button>
+                    </div>
+                `;
+                document.getElementById('modal-container').classList.remove('hidden');
+            }
+        }
+
+        function closeModal() {
+            document.getElementById('modal-container').classList.add('hidden');
+        }
+
+        // GAME LOGIC & STATE
+        const gameQuestions = [
+            {
+                q: "¿Cuál es la velocidad máxima permitida en zonas residenciales y escolares en Colombia?",
+                options: ["50 km/h", "30 km/h", "60 km/h"],
+                correct: 1,
+                reason: "¡Golazo! El límite es de 30 km/h para proteger a los peatones vulnerables."
+            },
+            {
+                q: "Si vas en motocicleta, ¿cuál es el equipamiento obligatorio en Colombia?",
+                options: ["Casco certificado, chaleco reflectivo después de las 6 pm y licencia", "Gafas de sol y tenis cómodos", "Cualquier casco sin importar certificación"],
+                correct: 0,
+                reason: "¡Anulado el peligro! El casco certificado y prenda reflectiva salvan vidas de noche."
+            },
+            {
+                q: "Al conducir bajo una lluvia intensa, ¿qué acción es la más responsable táctica?",
+                options: ["Prender luces estacionarias y acelerar", "Reducir la velocidad y duplicar la distancia de seguridad", "Continuar con la misma velocidad de siempre"],
+                correct: 1,
+                reason: "¡Gol de maestro! La lluvia reduce la tracción un 50%, bajar la velocidad previene hidroplaneos."
+            },
+            {
+                q: "¿Qué se debe hacer obligatoriamente ante una señal de PARE?",
+                options: ["Disminuir la velocidad un poco y seguir", "Detener completamente el vehículo por unos segundos y verificar paso seguro", "Tocar bocina y avanzar con cuidado"],
+                correct: 1,
+                reason: "¡Balón directo a la red! Detener el vehículo al 100% evita accidentes por falta de visibilidad."
+            }
+        ];
+
+        let currentQuestionIndex = 0;
+        let gameScore = 0;
+        let gameFaults = 0;
+
+        function loadGameQuestion() {
+            const qData = gameQuestions[currentQuestionIndex];
+            document.getElementById('game-question').innerText = qData.q;
+            
+            const optionsWrapper = document.getElementById('game-options');
+            optionsWrapper.innerHTML = '';
+            
+            qData.options.forEach((opt, idx) => {
+                optionsWrapper.innerHTML += `
+                    <label class="flex items-center gap-3 bg-slate-950/60 hover:bg-slate-950 border border-slate-800 p-3 rounded-xl cursor-pointer transition-colors text-xs text-slate-200">
+                        <input type="radio" name="game-opt" value="${idx}" class="accent-pitch-500">
+                        <span>${opt}</span>
+                    </label>
+                `;
+            });
+        }
+
+        function shootPenalty() {
+            const selectedOpt = document.querySelector('input[name="game-opt"]:checked');
+            if (!selectedOpt) {
+                alert("DT dice: ¡Primero selecciona una opción táctica para patear el balón!");
+                return;
+            }
+
+            const answerIndex = parseInt(selectedOpt.value);
+            const qData = gameQuestions[currentQuestionIndex];
+            const ball = document.getElementById('game-ball');
+            const keeper = document.getElementById('goalkeeper');
+            const feedbackBox = document.getElementById('game-feedback');
+
+            // Ball kicks animation
+            ball.classList.add('translate-y-[-180px]', 'scale-50');
+
+            setTimeout(() => {
+                if (answerIndex === qData.correct) {
+                    // Score GOAL
+                    gameScore++;
+                    document.getElementById('game-score').innerText = gameScore;
+                    
+                    // Keeper dives to wrong direction
+                    keeper.classList.add('translate-x-[100px]');
+                    
+                    // Display success feedback
+                    document.getElementById('feedback-icon').innerText = "⚽🎉";
+                    document.getElementById('feedback-title').innerText = "¡GOOOOOL DE SEGURIDAD VIAL!";
+                    document.getElementById('feedback-desc').innerText = qData.reason;
+                } else {
+                    // FAULT / Save
+                    gameFaults++;
+                    document.getElementById('game-faults').innerText = gameFaults;
+                    
+                    // Keeper saves
+                    keeper.classList.add('translate-x-0');
+                    ball.classList.remove('translate-y-[-180px]', 'scale-50');
+                    ball.classList.add('translate-y-[-140px]', 'scale-75'); // Hit keeper
+                    
+                    // Display fault feedback
+                    document.getElementById('feedback-icon').innerText = "🟥🧤";
+                    document.getElementById('feedback-title').innerText = "¡IMPRUDENCIA SALVADA POR EL PELIGRO!";
+                    document.getElementById('feedback-desc').innerText = "La respuesta era incorrecta. Cometes una falta en la vía.";
+                }
+
+                feedbackBox.classList.remove('hidden');
+
+                // Check prize win condition (needs at least 2 correct goals)
+                if (gameScore >= 2) {
+                    document.getElementById('prize-container').classList.remove('hidden');
+                }
+            }, 600);
+        }
+
+        function resetGameStep() {
+            const ball = document.getElementById('game-ball');
+            const keeper = document.getElementById('goalkeeper');
+            const feedbackBox = document.getElementById('game-feedback');
+
+            // Reset ball position
+            ball.className = "text-4xl transition-all duration-1000 transform scale-100 hover:scale-110 cursor-pointer";
+            // Reset keeper position
+            keeper.className = "relative bottom-0 text-5xl transition-all duration-500 transform translate-x-0";
+            
+            feedbackBox.classList.add('hidden');
+
+            // Cycle question
+            currentQuestionIndex = (currentQuestionIndex + 1) % gameQuestions.length;
+            loadGameQuestion();
+        }
+
+        // EVALUATION QUIZ SYSTEM
+        const evalQuiz = [
+            {
+                id: "eval-q1",
+                q: "1. ¿Qué es lo primero que debes asegurar antes de encender el motor de tu vehículo en el camerino?",
+                opts: [
+                    "Sintonizar la mejor emisora de radio",
+                    "Asegurar el cinturón de seguridad tuyo y de todos los pasajeros",
+                    "Revisar si tienes saldo en el celular"
+                ],
+                correct: 1
+            },
+            {
+                id: "eval-q2",
+                q: "2. ¿Quién tiene la prioridad de paso absoluta en la vía según la jerarquía de movilidad?",
+                opts: [
+                    "El peatón",
+                    "Los vehículos de transporte público masivo",
+                    "Las motocicletas deportivas"
+                ],
+                correct: 0
+            },
+            {
+                id: "eval-q3",
+                q: "3. Si utilizas el teléfono celular con 'manos libres' mientras conduces, ¿estás 100% seguro?",
+                opts: [
+                    "Sí, porque no sostienes el teléfono con las manos",
+                    "No, el cerebro pierde hasta un 40% de atención al procesar una conversación",
+                    "Depende de la velocidad a la que conduzcas"
+                ],
+                correct: 1
+            }
+        ];
+
+        function renderEvaluationQuiz() {
+            const wrapper = document.getElementById('quiz-questions-wrapper');
+            wrapper.innerHTML = '';
+            
+            evalQuiz.forEach((item, index) => {
+                let optionsHtml = '';
+                item.opts.forEach((opt, optIndex) => {
+                    optionsHtml += `
+                        <label class="flex items-center gap-3 bg-slate-950/60 hover:bg-slate-950 p-3.5 rounded-xl border border-slate-800/80 cursor-pointer transition-all">
+                            <input type="radio" name="${item.id}" value="${optIndex}" class="accent-pitch-500">
+                            <span class="text-sm text-slate-300">${opt}</span>
+                        </label>
+                    `;
+                });
+
+                wrapper.innerHTML += `
+                    <div class="space-y-3">
+                        <h4 class="text-sm sm:text-base font-bold text-white">${item.q}</h4>
+                        <div class="grid gap-2">
+                            ${optionsHtml}
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        function submitEvaluation() {
+            const userName = document.getElementById('eval-username').value.trim();
+            if (!userName) {
+                alert("DT dice: ¡Por favor, dinos tu nombre para poder emitir tu certificado!");
+                return;
+            }
+
+            // Check if all questions are answered
+            let allAnswered = true;
+            let totalCorrect = 0;
+
+            evalQuiz.forEach((item) => {
+                const checkedOption = document.querySelector(`input[name="${item.id}"]:checked`);
+                if (!checkedOption) {
+                    allAnswered = false;
+                } else if (parseInt(checkedOption.value) === item.correct) {
+                    totalCorrect++;
+                }
+            });
+
+            if (!allAnswered) {
+                alert("DT dice: ¡Revisa tu táctica! Te faltan preguntas por contestar.");
+                return;
+            }
+
+            if (totalCorrect === evalQuiz.length) {
+                // Show certificate
+                document.getElementById('cert-user-name').innerText = userName;
+                document.getElementById('certificate-box').classList.remove('hidden');
+                
+                // Scroll to certificate
+                document.getElementById('certificate-box').scrollIntoView({ behavior: 'smooth' });
+            } else {
+                alert("DT dice: Has fallado algunas respuestas estratégicas. Revisa las Charlas del DT e inténtalo de nuevo para aprobar al 100% y obtener la Licencia de Conductor Estrella.");
+            }
+        }
+
+        // WHATSAPP SEND ACTION
+        function sendWhatsAppQuote(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('quote-name').value;
+            const company = document.getElementById('quote-company').value;
+            const city = document.getElementById('quote-city').value;
+            const employees = document.getElementById('quote-employees').value;
+            const service = document.getElementById('quote-service').value;
+            const message = document.getElementById('quote-message').value;
+
+            // Formulate WhatsApp Message String
+            const baseText = `*COTIZACIÓN CAMPAÑA CAMERINO VIAL ⚽*\n\n` +
+                             `*Hola, me interesa agendar una capacitación:*\n` +
+                             `• *Nombre:* ${name}\n` +
+                             `• *Empresa:* ${company}\n` +
+                             `• *Ciudad:* ${city}\n` +
+                             `• *Número de Jugadores (Empl):* ${employees}\n` +
+                             `• *Servicio Interés:* ${service}\n` +
+                             `• *Notas/Código de Premio:* ${message}`;
+
+            const encodedText = encodeURIComponent(baseText);
+            
+            // Dummy or client-configured WhatsApp number
+            const targetPhone = "573151234567"; // Standard Colombia prefix placeholder
+            const waUrl = `https://wa.me/${targetPhone}?text=${encodedText}`;
+
+            window.open(waUrl, '_blank');
+        }
+
+        // INITIAL ONLOAD TRIGGERS
+        window.onload = function() {
+            updateCityStats('bogota');
+            loadGameQuestion();
+            renderEvaluationQuiz();
+        };
+    </script>
+</body>
+</html>
